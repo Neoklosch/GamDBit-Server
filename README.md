@@ -1,5 +1,5 @@
-# GemDBit-Server
-GemDBit Server
+# GamDBit-Server
+GamDBit Server
 
 # Install
 

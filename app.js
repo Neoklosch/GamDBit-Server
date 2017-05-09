@@ -26,7 +26,6 @@ var express = require('express');
     homeController = require('./controllers/home'),
     userController = require('./controllers/user'),
     apiController = require('./controllers/api'),
-    contactController = require('./controllers/contact'),
 
     /**
      * API keys and Passport configuration.
@@ -83,7 +82,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-    csrf: true,
+    csrf: false,
     xframe: 'SAMEORIGIN',
     xssProtection: true
 }));
@@ -113,8 +112,6 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
@@ -125,6 +122,13 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
+app.post('/api/user', apiController.postUser);
+app.put('/api/user', apiController.putUser);
+app.get('/api/train', apiController.getTrain);
+app.post('/api/train', apiController.postTrain);
+app.put('/api/train', apiController.putTrainDelay);
+app.post('/api/bidding', apiController.postBidding);
+app.get('/result', apiController.getResult);
 
 
 /**
